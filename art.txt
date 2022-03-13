@@ -1,0 +1,677 @@
+"misc": {
+        "logo": {
+            "img": "   _____                       ___       __                 __        \n  / ___/____  ____ _________  /   | ____/ /   _____  ____  / /___  __________        \n  \\__ \\/ __ \\/ __ `/ ___/ _ \\/ /| |/ __  / | / / _ \\/ __ \\/ __/ / / / ___/ _ \\\n ___/ / /_/ / /_/ / /__/  __/ ___ / /_/ /| |/ /  __/ / / / /_/ /_/ / /  /  __/       \n/____/ .___/\\__,_/\\___/\\___/_/  |_\\__,_/ |___/\\___/_/ /_/\\__/\\__,_/_/   \\___/\n    /_/",
+            "width": 85
+        }
+    },
+    "main": {
+        "ship": "a"
+    }
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+void fileIcon(int X, int Y)
+{
+	texture[0] = "####";
+	texture[1] = "%   #";
+	texture[2] = "%    #";
+	texture[3] = "%    #";
+	texture[4] = "%    #";
+	texture[5] = "%%%%%%";
+	drawTexture(X, Y, 6);
+}
+
+void ship(int X, int Y)
+{
+	const int n = 5;
+	texture[0] = "<\\__";
+	texture[1] = " \\  \\";
+	texture[2] = "<= 0 |-";
+	texture[3] = " /__/";
+	texture[4] = "</";
+
+	drawTexture(X, Y, n);
+}
+
+void shipExplosion(int X, int Y, int pos)
+{
+	int n = 0;
+	if (pos == 0)
+	{
+		texture[0] = " ";
+		texture[1] = "#\\_#";
+		texture[2] = " \\  \\";
+		texture[3] = "<= 0 |-";
+		texture[4] = " #__#";
+		texture[5] = "</ #";
+		n = 6;
+	}
+	if (pos == 1)
+	{
+		texture[0] = " #  #";
+		texture[1] = "# ## #";
+		texture[2] = " # ##\\";
+		texture[3] = " <# # |-";
+		texture[4] = " # # #";
+		texture[5] = " <# #";
+		n = 6;
+	}
+	if (pos == 2)
+	{
+		texture[0] = "  # ##";
+		texture[1] = " # #  #";
+		texture[2] = "#   #  #";
+		texture[3] = " #  % #";
+		texture[4] = "  #  #";
+		texture[5] = " #     #";
+		texture[6] = "  # # #";
+		n = 7;
+	}
+	if (pos == 3)
+	{
+		texture[0] = "  # %";
+		texture[1] = " % #  #";
+		texture[2] = "#   #  #";
+		texture[3] = " %  = #";
+		texture[4] = "  #  %";
+		texture[5] = " %     %";
+		texture[6] = "  % # #";
+		n = 7;
+	}
+	if (pos == 4)
+	{
+		texture[0] = "  = =";
+		texture[1] = " % %  %";
+		texture[2] = "#   #  %";
+		texture[3] = " =  + %";
+		texture[4] = "  #  %";
+		texture[5] = " %     =";
+		texture[6] = "  = # =";
+		n = 7;
+	}
+	if (pos == 5)
+	{
+		texture[0] = "  + +";
+		texture[1] = " % %  %";
+		texture[2] = "%   %  =";
+		texture[3] = " +    =";
+		texture[4] = "  %  %";
+		texture[5] = " =     =";
+		texture[6] = "  + % +";
+		n = 7;
+	}
+	if (pos == 6)
+	{
+		texture[0] = " ";
+		texture[1] = "   +";
+		texture[2] = "=   =  +";
+		texture[3] = " ";
+		texture[4] = "  =  =";
+		texture[5] = " +     +";
+		texture[6] = "    =";
+		n = 7;
+	}
+	if (pos == 7)
+	{
+		texture[0] = " ";
+		texture[1] = " ";
+		texture[2] = "+   +";
+		texture[3] = " ";
+		texture[4] = " ";
+		texture[5] = " ";
+		texture[6] = "    +";
+		n = 7;
+	}
+	if (pos == 8)
+	{
+		texture[0] = " ";
+		texture[1] = " ";
+		texture[2] = " ";
+		texture[3] = " ";
+		texture[4] = " ";
+		texture[5] = " ";
+		texture[6] = " ";
+		n = 7;
+	}
+
+	drawTexture(X, Y, n);
+}
+
+void asteroid(int X, int Y, int type)
+{
+	int n = 0;
+
+	if (type == 0)
+	{
+		n = 6;
+		texture[0] = "_/\\";
+		texture[1] = "\\. |";
+		texture[2] = "|  .\\";
+		texture[3] = "[    >";
+		texture[4] = "|  _/";
+		texture[5] = " \\/";
+	}
+	else if (type == 1)
+	{
+		n = 4;
+		texture[0] = "  _";
+		texture[1] = " /.\\";
+		texture[2] = "|  .|";
+		texture[3] = " \\_/";
+	}
+	else if (type == 2)
+	{
+		n = 5;
+		texture[0] = " ___";
+		texture[1] = "/ . \\";
+		texture[2] = "|   .\\";
+		texture[3] = " \\_  |";
+		texture[4] = "   \\/";
+	}
+	else if (type == 3)
+	{
+		n = 6;
+		texture[0] = "   _";
+		texture[1] = "  /.\\";
+		texture[2] = " /  .|";
+		texture[3] = "|    |";
+		texture[4] = "|   /";
+		texture[5] = " \\_/";
+	}
+	else if (type == 4)
+	{
+		n = 5;
+		texture[0] = "  _";
+		texture[1] = " /.\\";
+		texture[2] = "|  .|";
+		texture[3] = "|  /";
+		texture[4] = " \\/";
+	}
+	else if (type == 5)
+	{
+		n = 5;
+		texture[0] = " /\\";
+		texture[1] = "| .|";
+		texture[2] = "|  .\\";
+		texture[3] = "|  _/";
+		texture[4] = " \\/";
+	}
+
+	drawTexture(X, Y, n);
+}
+
+void ufo(int X, int Y, int type)
+{
+	int n = 0;
+	if (type == 0)
+	{
+		n = 3;
+		texture[0] = "  _=_";
+		texture[1] = "-=___=-";
+		texture[2] = " / | \\";
+	}
+	else if (type == 1)
+	{
+		n = 4;
+		texture[0] = "   .-.";
+		texture[1] = "  _|_|_";
+		texture[2] = "-=_   _=-";
+		texture[3] = "   \\_/";
+	}
+
+	drawTexture(X, Y, n);
+}
+
+void ufoExplosion(int X, int Y, int num)
+{
+	int n = 0;
+	if (num == 0)
+	{
+		texture[0] = "   .-.";
+		texture[1] = "  _#_|_";
+		texture[2] = "-=_   #=-";
+		texture[3] = "   #_/";
+		n = 4;
+	}
+	if (num == 1)
+	{
+		texture[0] = "   #-.";
+		texture[1] = "  #%#|#";
+		texture[2] = "-=_# #%#-";
+		texture[3] = "  #%#/#";
+		texture[4] = "   #";
+		n = 5;
+	}
+	if (num == 2)
+	{
+		texture[0] = "   %-%";
+		texture[1] = "  % %|%";
+		texture[2] = "-%_  % %-";
+		texture[3] = "  % %/%";
+		texture[4] = "   %";
+		n = 5;
+	}
+	if (num == 3)
+	{
+		texture[0] = "   =-=";
+		texture[1] = "  = =%=";
+		texture[2] = "-=%  = =";
+		texture[3] = "  = =%=";
+		texture[4] = "   =";
+		n = 5;
+	}
+	if (num == 4)
+	{
+		texture[0] = "  +-+";
+		texture[1] = " + +=+";
+		texture[2] = "+=  + +";
+		texture[3] = " + +=+";
+		texture[4] = "  +";
+		n = 5;
+	}
+	if (num == 5)
+	{
+		texture[0] = " +";
+		texture[1] = "   +";
+		texture[2] = "+    +";
+		texture[3] = "   +";
+		int n = 4;
+	}
+	if (num == 6)
+	{
+		texture[0] = " +";
+		texture[1] = " ";
+		texture[2] = "+";
+		texture[3] = "   +";
+		int n = 4;
+	}
+
+	drawTexture(X, Y, n);
+}
+
+void moon(int X, int Y)
+{
+	int n = 16;
+         ____
+     _---    ---_
+   _/    o      o-_
+  /   _        /|  \\
+ |   / \\   /\\ .     |
+ |  |   |. \\/. .    |
+|   .\\_/  ()         |
+|         . () _  () |
+| |         . / \\    |
+| *-  |      |   |   |
+|      \\|    /\\_/    |
+ |     -*--  \\/     |
+ |     /|       *   |
+  \\_           <> _/
+    -__        __-
+       --____--
+
+	drawTexture(X, Y, n);
+}
+
+void mars(int X, int Y)
+{
+	int n = 21;
+          ___---___
+       _--        _--_
+    _--      ___--    --_
+   /---___---      _     \\
+  /      _        / \\     \\
+ | |    / \\      |   | .   |
+ |     /_/      /\\\\_/      |
+ |     /        \\/         |
+|            .              |
+|           .               |
+|                           |
+|____                       |
+|    ----||__      ____     |
+ |           ----_/    \\__ |
+ |-_                      -|
+ | _-  _--_                |
+  \\     --       ______   /
+   \\_       __---      -_/
+     --  _--          --
+       ---___   ___---
+             ---
+
+	drawTexture(X, Y, n);
+}
+
+void jupiter(int X, int Y)
+{
+         __-------__
+      __-            -_
+    _-            -    -_
+   /      -*-  - .-      \\
+  /                       \\
+ | - - -   -  ---    --  - |
+ |              .    .     |
+ |=--==-==-=----==--==-=---|
+|                           |
+|  -- -  -  -  -    -    -  |
+|               .           |
+|--===--==--=--===--=-=-=-==|
+|                           |
+ |-=__              _--_   |
+ |    --=---===--==-_ 0_-==|
+ |                   --    |
+  \\   -   -  -   - -o o- -/
+   \\                     /
+    --_               _--
+       --__       __--
+           -------
+int n = 22;
+	drawTexture(X, Y, n);
+}
+
+void uran(int X, int Y) // Uran
+{
+         __-------__
+      __-           -_
+    _-                 -_
+   /                     \\
+  /                       \\
+ |                         |
+ |                         |
+ |                         |
+|                           |
+|                           |
+|                           |
+|                           |
+|                           |
+ |                         |
+ |                         |
+ |                         |
+  \\                       /
+   \\                     /
+    --_               _--
+       --__       __--
+           -------
+	int n = 21;
+	drawTexture(X, Y, n);
+}
+
+void saturn(int X, int Y)
+{
+                               ...
+                            .......
+               __-------__ ....  ..
+            __-           -_.    .
+          _-       / /       -_.. .
+         /         /  /       .\\ .
+        /      / /       /  ... \\
+       |          / /      . .   |
+       |   // /   /    .. .      |
+       |  /           .. ....    |
+      |  //         . . .  .      |
+      |  /        .... .          |
+      |  /         .  .        /  |
+      |         . . .       / /   |
+     .|       .  . .       /   /  |
+   ..  |    . .. ..      / //    |
+   ..  |   . ..          /       |
+  ..   | .. ..     /    /  /     |
+ . .   .\\  .         /  /       /
+.   . .  \\.   /   /    /       /
+..   .....--_   / / /       _--
+   .. ..     --__       __--
+                 -------
+	int n = 23;
+	drawTexture(X, Y, n);
+}
+
+void neptune(int X, int Y)
+{
+ 
+         __-------__
+      __-           -_
+    _-     _ _-        -_
+   /   ---- -            \\
+  /                       \\
+ |                         |
+ |          =-             |
+ |                         |
+|              __           |
+|             _\\_\\__        |
+|              -     --     |
+|                           |
+|            .              |
+ |  =                      |
+ |                         |
+ |                         |
+  \\ o                     /
+   \\     __---------___  /
+    --_--     __      _--
+       --__       __--
+           -------
+	drawTexture(X, Y, 22);
+}
+
+void pluto(int X, int Y)
+{
+	texture[0] = "   __---__";
+	texture[1] = "  /    .  \\";
+	texture[2] = " | . . . . |";
+	texture[3] = "|  . .  :  :|";
+	texture[4] = "| . . .__: _|";
+	texture[5] = "|  .. /  \\/ |";
+	texture[6] = " |. . |    |";
+	texture[7] = "  \\__/  __/";
+	texture[8] = "     ---";
+	drawTexture(X, Y, 9);
+}
+
+void voyager(int X, int Y)
+{
+	texture[0] = " o_";
+	texture[1] = "  \\|";
+	texture[2] = "   | /|";
+	texture[3] = "  <|| |";
+	texture[4] = "  /| \\|";
+	texture[5] = " / |";
+	texture[6] = "/";
+
+	drawTexture(X, Y, 7);
+}
+
+
+void asteroidExplosion(int X, int Y, int type, int pos)
+{
+	int n = 0;
+	if (type == 0 || type == 4 || type == 5)
+	{
+		if (pos == 0)
+		{
+			texture[0] = "_/\\";
+			texture[1] = "\\# |";
+			texture[2] = "|   #";
+			texture[3] = "[    >";
+			texture[4] = "|# #/";
+			texture[5] = " \\/";
+			n = 6;
+		}
+		if (pos == 1)
+		{
+			texture[0] = "_#\\";
+			texture[1] = "# #|#";
+			texture[2] = "|# # #";
+			texture[3] = "[# ##>";
+			texture[4] = "# # #";
+			texture[5] = " #/#";
+			n = 6;
+		}
+		if (pos == 2)
+		{
+			texture[0] = "_=#";
+			texture[1] = "= =#=";
+			texture[2] = "|= = =";
+			texture[3] = "#= ==>";
+			texture[4] = "= = =";
+			texture[5] = " =/=";
+			n = 6;
+		}
+		if (pos == 3)
+		{
+			texture[0] = "_+=";
+			texture[1] = "+ +=+";
+			texture[2] = "-+ - +";
+			texture[3] = "=+ ++>";
+			texture[4] = "+ + +";
+			texture[5] = " +/+";
+			n = 6;
+		}
+		if (pos == 4)
+		{
+			texture[0] = "+ =";
+			texture[1] = " - =";
+			texture[2] = "-  -";
+			texture[3] = "+ -  +";
+			texture[4] = " ";
+			texture[5] = " -+";
+			n = 6;
+		}
+		if (pos == 5)
+		{
+			texture[0] = " ";
+			texture[1] = "   +";
+			texture[2] = " ";
+			texture[3] = "+     ";
+			texture[4] = " ";
+			texture[5] = "  +";
+			n = 6;
+		}
+	}
+	if (type == 1)
+	{
+		if (pos == 0)
+		{
+			texture[0] = "  _";
+			texture[1] = " #.\\";
+			texture[2] = "|  .#";
+			texture[3] = " \\_/";
+			n = 4;
+		}
+		if (pos == 1)
+		{
+			texture[0] = " #_";
+			texture[1] = "#%#\#";
+			texture[2] = "|# #%#";
+			texture[3] = " \%/#";
+			n = 4;
+		}
+		if (pos == 2)
+		{
+			texture[0] = " %=";
+			texture[1] = "%=%+%";
+			texture[2] = "|% %=%";
+			texture[3] = " -=-%";
+			n = 4;
+		}
+		if (pos == 3)
+		{
+			texture[0] = " =+";
+			texture[1] = "=+=-=";
+			texture[2] = "-= =+=";
+			texture[3] = "  - =";
+			n = 4;
+		}
+		if (pos == 4)
+		{
+			texture[0] = "+";
+			texture[1] = " - +";
+			texture[2] = "+ +";
+			texture[3] = " +";
+			n = 4;
+		}
+		if (pos == 5)
+		{
+			texture[0] = " ";
+			texture[1] = "   +";
+			texture[2] = " ";
+			texture[3] = " +";
+			n = 4;
+		}
+	}
+	if (type == 2 || type == 3)
+	{
+		if (pos == 0)
+		{
+			texture[0] = " ___";
+			texture[1] = "/ .#\\";
+			texture[2] = "|   .\\";
+			texture[3] = " #_ #|";
+			texture[4] = "   \\/";
+			n = 5;
+		}
+		if (pos == 1)
+		{
+			texture[0] = " __#";
+			texture[1] = "/ #%#";
+			texture[2] = "|# ##\\";
+			texture[3] = "#%##%#";
+			texture[4] = " # \\#";
+			n = 5;
+		}
+		if (pos == 2)
+		{
+			texture[0] = " __%";
+			texture[1] = "= +=%";
+			texture[2] = "|# %+=";
+			texture[3] = "%=%+=%";
+			texture[4] = " % =%";
+			n = 5;
+		}
+		if (pos == 3)
+		{
+			texture[0] = "  -=";
+			texture[1] = "-  +=";
+			texture[2] = "-= +-+";
+			texture[3] = "=+= =";
+			texture[4] = " = +=";
+			n = 5;
+		}
+		if (pos == 4)
+		{
+			texture[0] = "  + =";
+			texture[1] = "-=";
+			texture[2] = "  =";
+			texture[3] = " =  -";
+			n = 5;
+		}
+		if (pos == 5)
+		{
+			texture[0] = "  +";
+			texture[1] = " ";
+			texture[2] = " ";
+			texture[3] = " +";
+			n = 5;
+		}
+	}
+	drawTexture(X, Y, n);
+}
+
+void logo(int X, int Y)
+{
+	texture[0] = "   _____                       ___       __                 __                       ";
+	texture[1] = "  / ___/____  ____ _________  /   | ____/ /   _____  ____  / /___  __________        ";
+	texture[2] = "  \\__ \\/ __ \\/ __ `/ ___/ _ \\/ /| |/ __  / | / / _ \\/ __ \\/ __/ / / / ___/ _ \\";
+	texture[3] = " ___/ / /_/ / /_/ / /__/  __/ ___ / /_/ /| |/ /  __/ / / / /_/ /_/ / /  /  __/       ";
+	texture[4] = "/____/ .___/\\__,_/\\___/\\___/_/  |_\\__,_/ |___/\\___/_/ /_/\\__/\\__,_/_/   \\___/";
+	texture[5] = "    /_/                                                                              ";
+	drawTexture(X, Y, 6);
+}
+
